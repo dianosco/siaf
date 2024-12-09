@@ -2,5 +2,9 @@
 	"Gp_Environment": {
 		"type": "string",
 		"value": "dev"
+	},
+	"Gp_CustName": {
+		"type": "string",
+		"value": "custname"
 	}
 }

@@ -29,14 +29,7 @@
 					{
 						"name": "Environment Variables",
 						"type": "Lookup",
-						"dependsOn": [
-							{
-								"activity": "Set Control Server Name",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
 							"retry": 0,
@@ -56,30 +49,16 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"ServerName": {
-										"value": "@variables('Va_SqlServerName')",
+										"value": "@concat(\n     'siaf'\n    ,pipeline().globalParameters.Gp_Environment\n    ,pipeline().globalParameters.Gp_CustName\n    ,'sqlserver.database.windows.net'\n)",
 										"type": "Expression"
 									},
-									"DatabaseName": "siafdevcustnamesqldatabase",
+									"DatabaseName": {
+										"value": "@concat(\n     'siaf'\n    ,pipeline().globalParameters.Gp_Environment\n    ,pipeline().globalParameters.Gp_CustName\n    ,'sqldatabase'\n)",
+										"type": "Expression"
+									},
 									"TableSchema": "ztg",
 									"TableName": "MyTable"
 								}
-							}
-						}
-					},
-					{
-						"name": "Set Control Server Name",
-						"type": "SetVariable",
-						"dependsOn": [],
-						"policy": {
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "Va_SqlServerName",
-							"value": {
-								"value": "@concat(\n     'siaf'\n    ,pipeline().globalParameters.Gp_Environment\n    ,'custnamesqlserver.database.windows.net'\n    )",
-								"type": "Expression"
 							}
 						}
 					}
@@ -108,29 +87,12 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Lookup1",
-						"type": "Lookup",
+						"name": "Wait1",
+						"type": "Wait",
 						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
 						"userProperties": [],
 						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "Ds_ControlDb",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"firstRowOnly": false
+							"waitTimeInSeconds": 1
 						}
 					}
 				],
@@ -139,9 +101,7 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/Ds_ControlDb')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Pl_Pipeline2')]",
@@ -216,20 +176,16 @@
 				},
 				"parameters": {
 					"ServerName": {
-						"type": "string",
-						"defaultValue": "siafdevcustnamesqlserver.database.windows.net"
+						"type": "string"
 					},
 					"DatabaseName": {
-						"type": "string",
-						"defaultValue": "siafdevcustnamesqldatabase"
+						"type": "string"
 					},
 					"TableSchema": {
-						"type": "string",
-						"defaultValue": "ztg"
+						"type": "string"
 					},
 					"TableName": {
-						"type": "string",
-						"defaultValue": "MyTable"
+						"type": "string"
 					}
 				},
 				"annotations": [],
@@ -257,12 +213,10 @@
 			"properties": {
 				"parameters": {
 					"ServerName": {
-						"type": "string",
-						"defaultValue": "siafdevcustnamesqlserver.database.windows.net"
+						"type": "string"
 					},
 					"DatabaseName": {
-						"type": "string",
-						"defaultValue": "siafdevcustnamesqldatabase"
+						"type": "string"
 					}
 				},
 				"annotations": [],
