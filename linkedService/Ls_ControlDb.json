@@ -1,11 +1,21 @@
 {
 	"name": "Ls_ControlDb",
 	"properties": {
+		"parameters": {
+			"ServerName": {
+				"type": "string",
+				"defaultValue": "siafdevcustnamesqlserver.database.windows.net"
+			},
+			"DatabaseName": {
+				"type": "string",
+				"defaultValue": "siafdevcustnamesqldatabase"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"server": "siafdevcustnamesqlserver.database.windows.net",
-			"database": "siafdevcustnamesqldatabase",
+			"server": "@{linkedService().ServerName}",
+			"database": "@{linkedService().DatabaseName}",
 			"encrypt": "mandatory",
 			"trustServerCertificate": false,
 			"authenticationType": "SystemAssignedManagedIdentity",
