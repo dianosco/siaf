@@ -1,5 +1,13 @@
 {
 	"name": "siafdevcustnamedatafactory",
+	"properties": {
+		"globalParameters": {
+			"Gp_Environment": {
+				"type": "string",
+				"value": "dev"
+			}
+		}
+	},
 	"location": "canadacentral",
 	"identity": {
 		"type": "SystemAssigned",
