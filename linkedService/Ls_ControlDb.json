@@ -3,12 +3,10 @@
 	"properties": {
 		"parameters": {
 			"ServerName": {
-				"type": "string",
-				"defaultValue": "siafdevcustnamesqlserver.database.windows.net"
+				"type": "string"
 			},
 			"DatabaseName": {
-				"type": "string",
-				"defaultValue": "siafdevcustnamesqldatabase"
+				"type": "string"
 			}
 		},
 		"annotations": [],
