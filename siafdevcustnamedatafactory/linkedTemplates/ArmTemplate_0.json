@@ -111,8 +111,14 @@
 					"referenceName": "Ls_ControlDb",
 					"type": "LinkedServiceReference",
 					"parameters": {
-						"ServerName": "siafdevcustnamesqlserver.database.windows.net",
-						"DatabaseName": "siafdevcustnamesqldatabase"
+						"ServerName": {
+							"value": "@dataset().ServerName",
+							"type": "Expression"
+						},
+						"DatabaseName": {
+							"value": "@dataset().DatabaseName",
+							"type": "Expression"
+						}
 					}
 				},
 				"parameters": {
@@ -137,8 +143,14 @@
 				"type": "AzureSqlTable",
 				"schema": [],
 				"typeProperties": {
-					"schema": "ztg",
-					"table": "MyTable"
+					"schema": {
+						"value": "@dataset().TableSchema",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().TableName",
+						"type": "Expression"
+					}
 				}
 			},
 			"dependsOn": [
@@ -180,7 +192,10 @@
 								"referenceName": "Ds_ControlDb",
 								"type": "DatasetReference",
 								"parameters": {
-									"ServerName": "siafdevcustnamesqlserver.database.windows.net",
+									"ServerName": {
+										"value": "@variables('Va_SqlServerName')",
+										"type": "Expression"
+									},
 									"DatabaseName": "siafdevcustnamesqldatabase",
 									"TableSchema": "ztg",
 									"TableName": "MyTable"
@@ -200,7 +215,7 @@
 						"typeProperties": {
 							"variableName": "Va_SqlServerName",
 							"value": {
-								"value": "@concat(\n     'siaf'\n    ,pipeline().globalParameters.Gp_Environment\n    ,'devcustnamesqlserver.database.windows.net'\n    )",
+								"value": "@concat(\n     'siaf'\n    ,pipeline().globalParameters.Gp_Environment\n    ,'custnamesqlserver.database.windows.net'\n    )",
 								"type": "Expression"
 							}
 						}
