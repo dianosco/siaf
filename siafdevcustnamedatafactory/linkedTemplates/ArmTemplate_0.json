@@ -170,14 +170,8 @@
 					}
 				],
 				"typeProperties": {
-					"schema": {
-						"value": "@dataset().TableSchema",
-						"type": "Expression"
-					},
-					"table": {
-						"value": "@dataset().TableName",
-						"type": "Expression"
-					}
+					"schema": "ztg",
+					"table": "MyTable"
 				}
 			},
 			"dependsOn": [
@@ -218,7 +212,12 @@
 							"dataset": {
 								"referenceName": "Ds_ControlDb",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"ServerName": "siafdevcustnamesqlserver.database.windows.net",
+									"DatabaseName": "siafdevcustnamesqldatabase",
+									"TableSchema": "ztg",
+									"TableName": "MyTable"
+								}
 							}
 						}
 					},
