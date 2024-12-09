@@ -1,1 +1,6 @@
-{}
+{
+	"Gp_Environment": {
+		"type": "string",
+		"value": "dev"
+	}
+}
