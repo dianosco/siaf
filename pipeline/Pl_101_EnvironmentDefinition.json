@@ -29,7 +29,13 @@
 					},
 					"dataset": {
 						"referenceName": "Ds_ControlDb",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"ServerName": "siafdevcustnamesqlserver.database.windows.net",
+							"DatabaseName": "siafdevcustnamesqldatabase",
+							"TableSchema": "ztg",
+							"TableName": "MyTable"
+						}
 					}
 				}
 			},
