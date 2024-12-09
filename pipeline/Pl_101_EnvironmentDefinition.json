@@ -17,7 +17,6 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select 1",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -26,8 +25,30 @@
 						"type": "DatasetReference"
 					}
 				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Va_SqlServerName",
+					"value": {
+						"value": "@concat(\n     'siaf'\n    ,pipeline().globalParameters.Gp_Environment\n    ,'devcustnamesqlserver.database.windows.net'\n    )",
+						"type": "Expression"
+					}
+				}
 			}
 		],
+		"variables": {
+			"Va_SqlServerName": {
+				"type": "String"
+			}
+		},
 		"folder": {
 			"name": "100_Control"
 		},
