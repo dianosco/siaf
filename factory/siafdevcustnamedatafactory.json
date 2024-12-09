@@ -1,0 +1,9 @@
+{
+	"name": "siafdevcustnamedatafactory",
+	"location": "canadacentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "7ebbeb35-d6ca-4299-83fb-f2d0110083df",
+		"tenantId": "9ca75128-a244-4596-877b-f24828e476e2"
+	}
+}
