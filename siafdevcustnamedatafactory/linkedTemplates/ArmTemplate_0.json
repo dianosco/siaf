@@ -9,11 +9,11 @@
 		},
 		"Ls_ControlDb_properties_typeProperties_server": {
 			"type": "string",
-			"defaultValue": "siafdevcustnamesqlserver.database.windows.net"
+			"defaultValue": "@{linkedService().ServerName}"
 		},
 		"Ls_ControlDb_properties_typeProperties_database": {
 			"type": "string",
-			"defaultValue": "siafdevcustnamesqldatabase"
+			"defaultValue": "@{linkedService().DatabaseName}"
 		}
 	},
 	"variables": {
@@ -77,6 +77,16 @@
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"parameters": {
+					"ServerName": {
+						"type": "string",
+						"defaultValue": "siafdevcustnamesqlserver.database.windows.net"
+					},
+					"DatabaseName": {
+						"type": "string",
+						"defaultValue": "siafdevcustnamesqldatabase"
+					}
+				},
 				"annotations": [],
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
@@ -99,7 +109,11 @@
 			"properties": {
 				"linkedServiceName": {
 					"referenceName": "Ls_ControlDb",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"ServerName": "siafdevcustnamesqlserver.database.windows.net",
+						"DatabaseName": "siafdevcustnamesqldatabase"
+					}
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
@@ -191,7 +205,14 @@
 					{
 						"name": "Environment Variables",
 						"type": "Lookup",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Set Control Server Name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "0.12:00:00",
 							"retry": 0,
@@ -203,7 +224,6 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"sqlReaderQuery": "select 1",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
@@ -213,10 +233,32 @@
 								"parameters": {}
 							}
 						}
+					},
+					{
+						"name": "Set Control Server Name",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "Va_SqlServerName",
+							"value": {
+								"value": "@concat(\n     'siaf'\n    ,pipeline().globalParameters.Gp_Environment\n    ,'devcustnamesqlserver.database.windows.net'\n    )",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
+				},
+				"variables": {
+					"Va_SqlServerName": {
+						"type": "String"
+					}
 				},
 				"folder": {
 					"name": "100_Control"

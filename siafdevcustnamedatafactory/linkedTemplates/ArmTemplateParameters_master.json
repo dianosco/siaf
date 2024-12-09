@@ -6,10 +6,10 @@
 			"value": "siafdevcustnamedatafactory"
 		},
 		"Ls_ControlDb_properties_typeProperties_server": {
-			"value": "siafdevcustnamesqlserver.database.windows.net"
+			"value": "@{linkedService().ServerName}"
 		},
 		"Ls_ControlDb_properties_typeProperties_database": {
-			"value": "siafdevcustnamesqldatabase"
+			"value": "@{linkedService().DatabaseName}"
 		},
 		"containerUri": {
 			"value": ""

@@ -9,11 +9,11 @@
 		},
 		"Ls_ControlDb_properties_typeProperties_server": {
 			"type": "string",
-			"defaultValue": "siafdevcustnamesqlserver.database.windows.net"
+			"defaultValue": "@{linkedService().ServerName}"
 		},
 		"Ls_ControlDb_properties_typeProperties_database": {
 			"type": "string",
-			"defaultValue": "siafdevcustnamesqldatabase"
+			"defaultValue": "@{linkedService().DatabaseName}"
 		},
 		"containerUri": {
 			"type": "string",
