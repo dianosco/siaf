@@ -5,14 +5,7 @@
 			{
 				"name": "Environment Variables",
 				"type": "Lookup",
-				"dependsOn": [
-					{
-						"activity": "Set Control Server Name",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -32,30 +25,16 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"ServerName": {
-								"value": "@variables('Va_SqlServerName')",
+								"value": "@concat(\n     'siaf'\n    ,pipeline().globalParameters.Gp_Environment\n    ,pipeline().globalParameters.Gp_CustName\n    ,'sqlserver.database.windows.net'\n\n)",
 								"type": "Expression"
 							},
-							"DatabaseName": "siafdevcustnamesqldatabase",
+							"DatabaseName": {
+								"value": "@concat(\n     'siaf'\n    ,pipeline().globalParameters.Gp_Environment\n    ,pipeline().globalParameters.Gp_CustName\n    ,'sqldatabase'\n\n)",
+								"type": "Expression"
+							},
 							"TableSchema": "ztg",
 							"TableName": "MyTable"
 						}
-					}
-				}
-			},
-			{
-				"name": "Set Control Server Name",
-				"type": "SetVariable",
-				"dependsOn": [],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "Va_SqlServerName",
-					"value": {
-						"value": "@concat(\n     'siaf'\n    ,pipeline().globalParameters.Gp_Environment\n    ,'custnamesqlserver.database.windows.net'\n    )",
-						"type": "Expression"
 					}
 				}
 			}
