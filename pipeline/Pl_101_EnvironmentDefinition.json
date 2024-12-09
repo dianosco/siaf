@@ -5,7 +5,14 @@
 			{
 				"name": "Environment Variables",
 				"type": "Lookup",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Set Control Server Name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -27,7 +34,7 @@
 				}
 			},
 			{
-				"name": "Set variable1",
+				"name": "Set Control Server Name",
 				"type": "SetVariable",
 				"dependsOn": [],
 				"policy": {
