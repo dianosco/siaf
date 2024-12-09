@@ -5,8 +5,14 @@
 			"referenceName": "Ls_ControlDb",
 			"type": "LinkedServiceReference",
 			"parameters": {
-				"ServerName": "siafdevcustnamesqlserver.database.windows.net",
-				"DatabaseName": "siafdevcustnamesqldatabase"
+				"ServerName": {
+					"value": "@dataset().ServerName",
+					"type": "Expression"
+				},
+				"DatabaseName": {
+					"value": "@dataset().DatabaseName",
+					"type": "Expression"
+				}
 			}
 		},
 		"parameters": {
@@ -31,8 +37,14 @@
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "ztg",
-			"table": "MyTable"
+			"schema": {
+				"value": "@dataset().TableSchema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().TableName",
+				"type": "Expression"
+			}
 		}
 	}
 }
