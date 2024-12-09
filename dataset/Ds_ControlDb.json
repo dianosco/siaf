@@ -64,14 +64,8 @@
 			}
 		],
 		"typeProperties": {
-			"schema": {
-				"value": "@dataset().TableSchema",
-				"type": "Expression"
-			},
-			"table": {
-				"value": "@dataset().TableName",
-				"type": "Expression"
-			}
+			"schema": "ztg",
+			"table": "MyTable"
 		}
 	}
 }
