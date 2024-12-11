@@ -216,11 +216,11 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"pa_serverName": {
-										"value": "@variables('va_ControlServerName')",
+										"value": "@variables('va_controlServerName')",
 										"type": "Expression"
 									},
 									"pa_databaseName": {
-										"value": "@variables('va_ControlDatabaseName')",
+										"value": "@variables('va_controlDatabaseName')",
 										"type": "Expression"
 									},
 									"pa_tableSchema": "ingest",
