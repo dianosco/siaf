@@ -1,5 +1,5 @@
 {
-	"name": "Ls_ControlDb",
+	"name": "ls_ControlDb",
 	"properties": {
 		"parameters": {
 			"ServerName": {
