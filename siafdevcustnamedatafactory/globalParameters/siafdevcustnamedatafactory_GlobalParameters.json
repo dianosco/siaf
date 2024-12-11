@@ -1,9 +1,9 @@
 {
-	"Gp_Environment": {
+	"gp_Environment": {
 		"type": "string",
 		"value": "dev"
 	},
-	"Gp_CustName": {
+	"gp_CustName": {
 		"type": "string",
 		"value": "custname"
 	}
