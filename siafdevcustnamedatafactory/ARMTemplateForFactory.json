@@ -29,7 +29,20 @@
 					{
 						"name": "Environment Variables",
 						"type": "Lookup",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Set Server Name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set Database Name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "0.12:00:00",
 							"retry": 0,
@@ -49,16 +62,51 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"ServerName": {
-										"value": "@concat(\n     'siaf'\n    ,pipeline().globalParameters.gp_Environment\n    ,pipeline().globalParameters.gp_CustName\n    ,'sqlserver.database.windows.net'\n)",
+										"value": "@variables('va_ControlServerName')",
 										"type": "Expression"
 									},
 									"DatabaseName": {
-										"value": "@concat(\n     'siaf'\n    ,pipeline().globalParameters.gp_Environment\n    ,pipeline().globalParameters.gp_CustName\n    ,'sqldatabase'\n)",
+										"value": "@variables('va_ControlDatabaseName')",
 										"type": "Expression"
 									},
-									"TableSchema": "ztg",
-									"TableName": "MyTable"
+									"TableSchema": "ingest",
+									"TableName": "vw_ArtifactsToIngestBySource"
 								}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "Set Server Name",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "va_ControlServerName",
+							"value": {
+								"value": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_Environment\n    ,pipeline().globalParameters.gp_CustName\n    ,'sqlserver.database.windows.net'\n)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set Database Name",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "va_ControlDatabaseName",
+							"value": {
+								"value": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_Environment\n    ,pipeline().globalParameters.gp_CustName\n    ,'sqldatabase'\n)",
+								"type": "Expression"
 							}
 						}
 					}
@@ -67,7 +115,10 @@
 					"elapsedTimeMetric": {}
 				},
 				"variables": {
-					"Va_SqlServerName": {
+					"va_ControlServerName": {
+						"type": "String"
+					},
+					"va_ControlDatabaseName": {
 						"type": "String"
 					}
 				},
@@ -161,7 +212,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "Ls_ControlDb",
+					"referenceName": "ls_ControlDb",
 					"type": "LinkedServiceReference"
 				},
 				"parameters": {
@@ -192,7 +243,9 @@
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_ControlDb')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ls_ControlDb')]",
