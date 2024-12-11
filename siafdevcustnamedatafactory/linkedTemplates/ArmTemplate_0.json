@@ -17,7 +17,7 @@
 		},
 		"ls_AzDataLakeStorage_SAMI_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://siafdevcustnamestaccraw.dfs.core.windows.net/"
+			"defaultValue": "@{linkedService().p_StAccUrl}"
 		}
 	},
 	"variables": {
@@ -132,6 +132,12 @@
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"parameters": {
+					"p_StAccUrl": {
+						"type": "string",
+						"defaultValue": "https://siafdevcustnamestaccraw.dfs.core.windows.net/"
+					}
+				},
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {

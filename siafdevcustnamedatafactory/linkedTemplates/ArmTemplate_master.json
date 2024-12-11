@@ -17,7 +17,7 @@
 		},
 		"ls_AzDataLakeStorage_SAMI_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://siafdevcustnamestaccraw.dfs.core.windows.net/"
+			"defaultValue": "@{linkedService().p_StAccUrl}"
 		},
 		"containerUri": {
 			"type": "string",
