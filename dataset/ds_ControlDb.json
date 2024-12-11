@@ -2,20 +2,20 @@
 	"name": "ds_ControlDb",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Ls_ControlDb",
+			"referenceName": "ls_ControlDb",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"ServerName": {
+			"pa_ServerName": {
 				"type": "string"
 			},
-			"DatabaseName": {
+			"pa_DatabaseName": {
 				"type": "string"
 			},
-			"TableSchema": {
+			"pa_TableSchema": {
 				"type": "string"
 			},
-			"TableName": {
+			"pa_TableName": {
 				"type": "string"
 			}
 		},
