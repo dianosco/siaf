@@ -82,32 +82,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pl_201_IngestSqlTable_SAMI')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Wait1",
-						"type": "Wait",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"waitTimeInSeconds": 1
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"folder": {
-					"name": "200_Ingestion"
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/pl_300_Pipeline3')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -219,8 +193,14 @@
 					"referenceName": "ls_AzSqlDatabase_SAMI",
 					"type": "LinkedServiceReference",
 					"parameters": {
-						"pa_serverName": "unservidorcualquiera.database.windows.net",
-						"pa_databaseName": "unadatabasecualquiera"
+						"pa_serverName": {
+							"value": "@dataset().pa_serverName",
+							"type": "Expression"
+						},
+						"pa_databaseName": {
+							"value": "@dataset().pa_databaseName",
+							"type": "Expression"
+						}
 					}
 				},
 				"parameters": {
@@ -241,12 +221,45 @@
 				"type": "AzureSqlTable",
 				"schema": [],
 				"typeProperties": {
-					"schema": "SalesLT",
-					"table": "ProductModel"
+					"schema": {
+						"value": "@dataset().pa_tableSchema",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().pa_tableName",
+						"type": "Expression"
+					}
 				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/ls_AzSqlDatabase_SAMI')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_AzStAccParquet_SAMI')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_AzDataLakeStorage_SAMI",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"pa_stAccUrl": "https://siafdevcustnamestaccraw.dfs.core.windows.net/"
+					}
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "landing"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_AzDataLakeStorage_SAMI')]"
 			]
 		},
 		{
@@ -409,6 +422,92 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_ControlDb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_201_IngestSqlTable_SAMI')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
+					},
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_AzSqlTable_SAMI",
+								"type": "DatasetReference",
+								"parameters": {
+									"pa_serverName": "unservidorcualquiera.database.windows.net",
+									"pa_databaseName": "unadatabasecualquiera",
+									"pa_tableSchema": "SalesLT",
+									"pa_tableName": "ProductModel"
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_AzStAccParquet_SAMI",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "200_Ingestion"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_AzSqlTable_SAMI')]",
+				"[concat(variables('factoryId'), '/datasets/ds_AzStAccParquet_SAMI')]"
 			]
 		}
 	]
