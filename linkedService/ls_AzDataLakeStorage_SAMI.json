@@ -2,7 +2,7 @@
 	"name": "ls_AzDataLakeStorage_SAMI",
 	"properties": {
 		"parameters": {
-			"p_StAccUrl": {
+			"pa_stAccUrl": {
 				"type": "string",
 				"defaultValue": "https://siafdevcustnamestaccraw.dfs.core.windows.net/"
 			}
@@ -10,7 +10,7 @@
 		"annotations": [],
 		"type": "AzureBlobFS",
 		"typeProperties": {
-			"url": "@{linkedService().p_StAccUrl}"
+			"url": "@{linkedService().pa_stAccUrl}"
 		}
 	}
 }
