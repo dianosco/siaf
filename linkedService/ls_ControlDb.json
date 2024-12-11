@@ -2,18 +2,18 @@
 	"name": "ls_ControlDb",
 	"properties": {
 		"parameters": {
-			"ServerName": {
+			"pa_serverName": {
 				"type": "string"
 			},
-			"DatabaseName": {
+			"pa_databaseName": {
 				"type": "string"
 			}
 		},
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"server": "@{linkedService().ServerName}",
-			"database": "@{linkedService().DatabaseName}",
+			"server": "@{linkedService().pa_serverName}",
+			"database": "@{linkedService().pa_databaseName}",
 			"encrypt": "mandatory",
 			"trustServerCertificate": false,
 			"authenticationType": "SystemAssignedManagedIdentity",
