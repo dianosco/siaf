@@ -1,0 +1,20 @@
+{
+	"name": "pl_201_IngestSqlTable_SAMI",
+	"properties": {
+		"activities": [
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 1
+				}
+			}
+		],
+		"folder": {
+			"name": "200_Ingestion"
+		},
+		"annotations": []
+	}
+}
