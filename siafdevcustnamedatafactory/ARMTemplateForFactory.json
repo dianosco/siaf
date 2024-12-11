@@ -86,7 +86,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"variableName": "va_ControlServerName",
+							"variableName": "va_controlServerName",
 							"value": {
 								"value": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_Environment\n    ,pipeline().globalParameters.gp_CustName\n    ,'sqlserver.database.windows.net'\n)",
 								"type": "Expression"
@@ -103,7 +103,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"variableName": "va_ControlDatabaseName",
+							"variableName": "va_controlDatabaseName",
 							"value": {
 								"value": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_Environment\n    ,pipeline().globalParameters.gp_CustName\n    ,'sqldatabase'\n)",
 								"type": "Expression"
@@ -115,10 +115,10 @@
 					"elapsedTimeMetric": {}
 				},
 				"variables": {
-					"va_ControlServerName": {
+					"va_controlServerName": {
 						"type": "String"
 					},
-					"va_ControlDatabaseName": {
+					"va_controlDatabaseName": {
 						"type": "String"
 					}
 				},
