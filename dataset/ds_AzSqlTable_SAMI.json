@@ -1,0 +1,16 @@
+{
+	"name": "ds_AzSqlTable_SAMI",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_AzSqlDatabase_SAMI",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"pa_serverName": "unservidorcualquiera.database.windows.net",
+				"pa_databaseName": "unadatabasecualquiera"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
