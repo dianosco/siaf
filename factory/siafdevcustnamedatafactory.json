@@ -6,7 +6,7 @@
 				"type": "string",
 				"value": "dev"
 			},
-			"gp_CustName": {
+			"gp_custName": {
 				"type": "string",
 				"value": "custname"
 			}
