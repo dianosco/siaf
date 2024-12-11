@@ -5,11 +5,11 @@
 			"referenceName": "ls_ControlDb",
 			"type": "LinkedServiceReference",
 			"parameters": {
-				"ServerName": {
+				"pa_serverName": {
 					"value": "@dataset().pa_serverName",
 					"type": "Expression"
 				},
-				"DatabaseName": {
+				"pa_databaseName": {
 					"value": "@dataset().pa_databaseName",
 					"type": "Expression"
 				}
