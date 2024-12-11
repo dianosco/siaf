@@ -9,6 +9,20 @@
 				"pa_databaseName": "unadatabasecualquiera"
 			}
 		},
+		"parameters": {
+			"pa_serverName": {
+				"type": "string"
+			},
+			"pa_databaseName": {
+				"type": "string"
+			},
+			"pa_tableSchema": {
+				"type": "string"
+			},
+			"pa_tableName": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [],
