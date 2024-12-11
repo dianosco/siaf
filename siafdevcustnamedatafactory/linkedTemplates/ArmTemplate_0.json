@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "siafdevcustnamedatafactory"
 		},
+		"ls_AzDataLakeStorage_SAMI_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().pa_stAccUrl}"
+		},
 		"ls_ControlDb_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "@{linkedService().pa_serverName}"
@@ -14,10 +18,6 @@
 		"ls_ControlDb_properties_typeProperties_database": {
 			"type": "string",
 			"defaultValue": "@{linkedService().pa_databaseName}"
-		},
-		"ls_AzDataLakeStorage_SAMI_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "@{linkedService().pa_stAccUrl}"
 		}
 	},
 	"variables": {
@@ -25,7 +25,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/pl_MainTestingPipeline')]",
+			"name": "[concat(parameters('factoryName'), '/pl_000_MainTestingPipeline')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -100,6 +100,25 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ls_AzDataLakeStorage_SAMI')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"pa_stAccUrl": {
+						"type": "string",
+						"defaultValue": "https://siafdevcustnamestaccraw.dfs.core.windows.net/"
+					}
+				},
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('ls_AzDataLakeStorage_SAMI_properties_typeProperties_url')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ls_ControlDb')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -128,25 +147,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ls_AzDataLakeStorage_SAMI')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"parameters": {
-					"pa_stAccUrl": {
-						"type": "string",
-						"defaultValue": "https://siafdevcustnamestaccraw.dfs.core.windows.net/"
-					}
-				},
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('ls_AzDataLakeStorage_SAMI_properties_typeProperties_url')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/ds_ControlDb')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -154,16 +154,7 @@
 				"linkedServiceName": {
 					"referenceName": "ls_ControlDb",
 					"type": "LinkedServiceReference",
-					"parameters": {
-						"ServerName": {
-							"value": "@dataset().pa_serverName",
-							"type": "Expression"
-						},
-						"DatabaseName": {
-							"value": "@dataset().pa_databaseName",
-							"type": "Expression"
-						}
-					}
+					"parameters": {}
 				},
 				"parameters": {
 					"pa_serverName": {
