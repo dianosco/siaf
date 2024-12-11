@@ -1,0 +1,22 @@
+{
+	"name": "ds_AzStAccParquet_SAMI",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_AzDataLakeStorage_SAMI",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"pa_stAccUrl": "https://siafdevcustnamestaccraw.dfs.core.windows.net/"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "landing"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
