@@ -1,11 +1,19 @@
 {
 	"name": "ls_AzSqlDatabase_SAMI",
 	"properties": {
+		"parameters": {
+			"pa_serverName": {
+				"type": "string"
+			},
+			"pa_databaseName": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"server": "siafdevcustnamesqlserver.database.windows.net",
-			"database": "siafdevcustnamesqldatabase",
+			"server": "@{linkedService().pa_serverName}",
+			"database": "@{linkedService().pa_databaseName}",
 			"encrypt": "mandatory",
 			"trustServerCertificate": false,
 			"authenticationType": "SystemAssignedManagedIdentity",
