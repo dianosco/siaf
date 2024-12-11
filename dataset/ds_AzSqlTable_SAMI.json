@@ -5,8 +5,14 @@
 			"referenceName": "ls_AzSqlDatabase_SAMI",
 			"type": "LinkedServiceReference",
 			"parameters": {
-				"pa_serverName": "unservidorcualquiera.database.windows.net",
-				"pa_databaseName": "unadatabasecualquiera"
+				"pa_serverName": {
+					"value": "@dataset().pa_serverName",
+					"type": "Expression"
+				},
+				"pa_databaseName": {
+					"value": "@dataset().pa_databaseName",
+					"type": "Expression"
+				}
 			}
 		},
 		"parameters": {
@@ -27,8 +33,14 @@
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "SalesLT",
-			"table": "ProductModel"
+			"schema": {
+				"value": "@dataset().pa_tableSchema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().pa_tableName",
+				"type": "Expression"
+			}
 		}
 	}
 }
