@@ -1,0 +1,17 @@
+{
+	"name": "ls_AzSqlDatabase_SAMI",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "siafdevcustnamesqlserver.database.windows.net",
+			"database": "siafdevcustnamesqldatabase",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SystemAssignedManagedIdentity",
+			"alwaysEncryptedSettings": {
+				"alwaysEncryptedAkvAuthType": "ManagedIdentity"
+			}
+		}
+	}
+}
