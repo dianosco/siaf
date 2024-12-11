@@ -64,7 +64,7 @@
 				"typeProperties": {
 					"variableName": "va_controlServerName",
 					"value": {
-						"value": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_Environment\n    ,pipeline().globalParameters.gp_CustName\n    ,'sqlserver.database.windows.net'\n)",
+						"value": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_environment\n    ,pipeline().globalParameters.gp_custName\n    ,'sqlserver.database.windows.net'\n)",
 						"type": "Expression"
 					}
 				}
@@ -81,7 +81,7 @@
 				"typeProperties": {
 					"variableName": "va_controlDatabaseName",
 					"value": {
-						"value": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_Environment\n    ,pipeline().globalParameters.gp_CustName\n    ,'sqldatabase'\n)",
+						"value": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_environment\n    ,pipeline().globalParameters.gp_custName\n    ,'sqldatabase'\n)",
 						"type": "Expression"
 					}
 				}
