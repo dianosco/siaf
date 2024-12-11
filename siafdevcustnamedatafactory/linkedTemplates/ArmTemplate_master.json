@@ -11,6 +11,14 @@
 			"type": "string",
 			"defaultValue": "@{linkedService().pa_stAccUrl}"
 		},
+		"ls_AzSqlDatabase_SAMI_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "@{linkedService().pa_serverName}"
+		},
+		"ls_AzSqlDatabase_SAMI_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "@{linkedService().pa_databaseName}"
+		},
 		"ls_ControlDb_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "@{linkedService().pa_serverName}"
@@ -48,6 +56,12 @@
 					},
 					"ls_AzDataLakeStorage_SAMI_properties_typeProperties_url": {
 						"value": "[parameters('ls_AzDataLakeStorage_SAMI_properties_typeProperties_url')]"
+					},
+					"ls_AzSqlDatabase_SAMI_properties_typeProperties_server": {
+						"value": "[parameters('ls_AzSqlDatabase_SAMI_properties_typeProperties_server')]"
+					},
+					"ls_AzSqlDatabase_SAMI_properties_typeProperties_database": {
+						"value": "[parameters('ls_AzSqlDatabase_SAMI_properties_typeProperties_database')]"
 					},
 					"ls_ControlDb_properties_typeProperties_server": {
 						"value": "[parameters('ls_ControlDb_properties_typeProperties_server')]"

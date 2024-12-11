@@ -8,6 +8,12 @@
 		"ls_AzDataLakeStorage_SAMI_properties_typeProperties_url": {
 			"value": "@{linkedService().pa_stAccUrl}"
 		},
+		"ls_AzSqlDatabase_SAMI_properties_typeProperties_server": {
+			"value": "@{linkedService().pa_serverName}"
+		},
+		"ls_AzSqlDatabase_SAMI_properties_typeProperties_database": {
+			"value": "@{linkedService().pa_databaseName}"
+		},
 		"ls_ControlDb_properties_typeProperties_server": {
 			"value": "@{linkedService().pa_serverName}"
 		},
