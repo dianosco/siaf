@@ -3,10 +3,12 @@
 	"properties": {
 		"parameters": {
 			"pa_serverName": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "unservidorcualquiera.database.windows.net"
 			},
 			"pa_databaseName": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "unadatabasecualquiera"
 			}
 		},
 		"annotations": [],
