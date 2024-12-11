@@ -130,19 +130,29 @@
 			"properties": {
 				"linkedServiceName": {
 					"referenceName": "ls_ControlDb",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"ServerName": {
+							"value": "@dataset().pa_serverName",
+							"type": "Expression"
+						},
+						"DatabaseName": {
+							"value": "@dataset().pa_databaseName",
+							"type": "Expression"
+						}
+					}
 				},
 				"parameters": {
-					"ServerName": {
+					"pa_serverName": {
 						"type": "string"
 					},
-					"DatabaseName": {
+					"pa_databaseName": {
 						"type": "string"
 					},
-					"TableSchema": {
+					"pa_tableSchema": {
 						"type": "string"
 					},
-					"TableName": {
+					"pa_tableName": {
 						"type": "string"
 					}
 				},
@@ -151,11 +161,11 @@
 				"schema": [],
 				"typeProperties": {
 					"schema": {
-						"value": "@dataset().TableSchema",
+						"value": "@dataset().pa_tableSchema",
 						"type": "Expression"
 					},
 					"table": {
-						"value": "@dataset().TableName",
+						"value": "@dataset().pa_tableName",
 						"type": "Expression"
 					}
 				}
@@ -205,16 +215,16 @@
 								"referenceName": "ds_ControlDb",
 								"type": "DatasetReference",
 								"parameters": {
-									"ServerName": {
+									"pa_serverName": {
 										"value": "@variables('va_ControlServerName')",
 										"type": "Expression"
 									},
-									"DatabaseName": {
+									"pa_databaseName": {
 										"value": "@variables('va_ControlDatabaseName')",
 										"type": "Expression"
 									},
-									"TableSchema": "ingest",
-									"TableName": "vw_ArtifactsToIngestBySource"
+									"pa_tableSchema": "ingest",
+									"pa_tableName": "vw_ArtifactsToIngestBySource"
 								}
 							},
 							"firstRowOnly": false
