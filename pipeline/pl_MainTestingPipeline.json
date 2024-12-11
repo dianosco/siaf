@@ -1,5 +1,5 @@
 {
-	"name": "Pl_MainTestingPipeline",
+	"name": "pl_MainTestingPipeline",
 	"properties": {
 		"activities": [
 			{
