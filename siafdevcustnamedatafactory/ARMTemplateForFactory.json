@@ -245,6 +245,45 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_AzSqlTable_SAMI')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_AzSqlDatabase_SAMI",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"pa_serverName": "unservidorcualquiera.database.windows.net",
+						"pa_databaseName": "unadatabasecualquiera"
+					}
+				},
+				"parameters": {
+					"pa_serverName": {
+						"type": "string"
+					},
+					"pa_databaseName": {
+						"type": "string"
+					},
+					"pa_tableSchema": {
+						"type": "string"
+					},
+					"pa_tableName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "SalesLT",
+					"table": "ProductModel"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_AzSqlDatabase_SAMI')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_ControlDb')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
