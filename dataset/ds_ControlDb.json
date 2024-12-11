@@ -3,7 +3,17 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_ControlDb",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"ServerName": {
+					"value": "@dataset().pa_serverName",
+					"type": "Expression"
+				},
+				"DatabaseName": {
+					"value": "@dataset().pa_databaseName",
+					"type": "Expression"
+				}
+			}
 		},
 		"parameters": {
 			"pa_serverName": {
@@ -24,11 +34,11 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": {
-				"value": "@dataset().TableSchema",
+				"value": "@dataset().pa_tableSchema",
 				"type": "Expression"
 			},
 			"table": {
-				"value": "@dataset().TableName",
+				"value": "@dataset().pa_tableName",
 				"type": "Expression"
 			}
 		}
