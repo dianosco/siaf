@@ -372,6 +372,8 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
+						"fileName": "SalesLT.ProductModel.parquet",
+						"folderPath": "sqlserver",
 						"fileSystem": "landing"
 					},
 					"compressionCodec": "snappy"
