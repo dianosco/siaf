@@ -6,13 +6,13 @@
 			"value": "siafdevcustnamedatafactory"
 		},
 		"ls_ControlDb_properties_typeProperties_server": {
-			"value": "@{linkedService().ServerName}"
+			"value": "@{linkedService().pa_serverName}"
 		},
 		"ls_ControlDb_properties_typeProperties_database": {
-			"value": "@{linkedService().DatabaseName}"
+			"value": "@{linkedService().pa_databaseName}"
 		},
 		"ls_AzDataLakeStorage_SAMI_properties_typeProperties_url": {
-			"value": "@{linkedService().p_StAccUrl}"
+			"value": "@{linkedService().pa_stAccUrl}"
 		}
 	}
 }

@@ -9,15 +9,15 @@
 		},
 		"ls_ControlDb_properties_typeProperties_server": {
 			"type": "string",
-			"defaultValue": "@{linkedService().ServerName}"
+			"defaultValue": "@{linkedService().pa_serverName}"
 		},
 		"ls_ControlDb_properties_typeProperties_database": {
 			"type": "string",
-			"defaultValue": "@{linkedService().DatabaseName}"
+			"defaultValue": "@{linkedService().pa_databaseName}"
 		},
 		"ls_AzDataLakeStorage_SAMI_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "@{linkedService().p_StAccUrl}"
+			"defaultValue": "@{linkedService().pa_stAccUrl}"
 		}
 	},
 	"variables": {
@@ -105,10 +105,10 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"parameters": {
-					"ServerName": {
+					"pa_serverName": {
 						"type": "string"
 					},
-					"DatabaseName": {
+					"pa_databaseName": {
 						"type": "string"
 					}
 				},
@@ -133,7 +133,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"parameters": {
-					"p_StAccUrl": {
+					"pa_stAccUrl": {
 						"type": "string",
 						"defaultValue": "https://siafdevcustnamestaccraw.dfs.core.windows.net/"
 					}

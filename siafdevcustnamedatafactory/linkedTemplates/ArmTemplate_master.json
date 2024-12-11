@@ -9,15 +9,15 @@
 		},
 		"ls_ControlDb_properties_typeProperties_server": {
 			"type": "string",
-			"defaultValue": "@{linkedService().ServerName}"
+			"defaultValue": "@{linkedService().pa_serverName}"
 		},
 		"ls_ControlDb_properties_typeProperties_database": {
 			"type": "string",
-			"defaultValue": "@{linkedService().DatabaseName}"
+			"defaultValue": "@{linkedService().pa_databaseName}"
 		},
 		"ls_AzDataLakeStorage_SAMI_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "@{linkedService().p_StAccUrl}"
+			"defaultValue": "@{linkedService().pa_stAccUrl}"
 		},
 		"containerUri": {
 			"type": "string",
