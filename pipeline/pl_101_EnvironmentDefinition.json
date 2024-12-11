@@ -25,11 +25,11 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"ServerName": {
-								"value": "@concat(\n     'siaf'\n    ,pipeline().globalParameters.Gp_Environment\n    ,pipeline().globalParameters.Gp_CustName\n    ,'sqlserver.database.windows.net'\n)",
+								"value": "@concat(\n     'siaf'\n    ,pipeline().globalParameters.gp_Environment\n    ,pipeline().globalParameters.gp_CustName\n    ,'sqlserver.database.windows.net'\n)",
 								"type": "Expression"
 							},
 							"DatabaseName": {
-								"value": "@concat(\n     'siaf'\n    ,pipeline().globalParameters.Gp_Environment\n    ,pipeline().globalParameters.Gp_CustName\n    ,'sqldatabase'\n)",
+								"value": "@concat(\n     'siaf'\n    ,pipeline().globalParameters.gp_Environment\n    ,pipeline().globalParameters.gp_CustName\n    ,'sqldatabase'\n)",
 								"type": "Expression"
 							},
 							"TableSchema": "ztg",
