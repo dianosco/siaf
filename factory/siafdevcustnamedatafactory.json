@@ -2,7 +2,7 @@
 	"name": "siafdevcustnamedatafactory",
 	"properties": {
 		"globalParameters": {
-			"Gp_Environment": {
+			"gp_Environment": {
 				"type": "string",
 				"value": "dev"
 			},
