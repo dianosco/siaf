@@ -12,7 +12,9 @@
 			}
 		},
 		"globalConfigurations": {
-			"PipelineBillingEnabled": "true"
+			"PipelineBillingEnabled": "true",
+			"factoryStagingLSReferenceName": "ls_AzDataLakeStorage_SAMI",
+			"factoryStagingLSType": "LinkedServiceReference"
 		}
 	},
 	"location": "canadacentral",
