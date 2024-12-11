@@ -21,7 +21,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "Ds_ControlDb",
+						"referenceName": "ds_ControlDb",
 						"type": "DatasetReference",
 						"parameters": {
 							"ServerName": {

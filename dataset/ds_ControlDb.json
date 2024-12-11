@@ -1,19 +1,9 @@
 {
-	"name": "Ds_ControlDb",
+	"name": "ds_ControlDb",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Ls_ControlDb",
-			"type": "LinkedServiceReference",
-			"parameters": {
-				"ServerName": {
-					"value": "@dataset().ServerName",
-					"type": "Expression"
-				},
-				"DatabaseName": {
-					"value": "@dataset().DatabaseName",
-					"type": "Expression"
-				}
-			}
+			"type": "LinkedServiceReference"
 		},
 		"parameters": {
 			"ServerName": {
