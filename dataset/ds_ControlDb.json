@@ -6,16 +6,16 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"pa_ServerName": {
+			"pa_serverName": {
 				"type": "string"
 			},
-			"pa_DatabaseName": {
+			"pa_databaseName": {
 				"type": "string"
 			},
-			"pa_TableSchema": {
+			"pa_tableSchema": {
 				"type": "string"
 			},
-			"pa_TableName": {
+			"pa_tableName": {
 				"type": "string"
 			}
 		},

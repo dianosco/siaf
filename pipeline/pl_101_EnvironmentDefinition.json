@@ -37,16 +37,16 @@
 						"referenceName": "ds_ControlDb",
 						"type": "DatasetReference",
 						"parameters": {
-							"pa_ServerName": {
+							"pa_serverName": {
 								"value": "@variables('va_ControlServerName')",
 								"type": "Expression"
 							},
-							"pa_DatabaseName": {
+							"pa_databaseName": {
 								"value": "@variables('va_ControlDatabaseName')",
 								"type": "Expression"
 							},
-							"pa_TableSchema": "ingest",
-							"pa_TableName": "vw_ArtifactsToIngestBySource"
+							"pa_tableSchema": "ingest",
+							"pa_tableName": "vw_ArtifactsToIngestBySource"
 						}
 					},
 					"firstRowOnly": false
