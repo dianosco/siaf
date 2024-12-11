@@ -5,10 +5,10 @@
 		"factoryName": {
 			"value": "siafdevcustnamedatafactory"
 		},
-		"Ls_ControlDb_properties_typeProperties_server": {
+		"ls_ControlDb_properties_typeProperties_server": {
 			"value": "@{linkedService().ServerName}"
 		},
-		"Ls_ControlDb_properties_typeProperties_database": {
+		"ls_ControlDb_properties_typeProperties_database": {
 			"value": "@{linkedService().DatabaseName}"
 		}
 	}

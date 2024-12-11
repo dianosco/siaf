@@ -7,11 +7,11 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "siafdevcustnamedatafactory"
 		},
-		"Ls_ControlDb_properties_typeProperties_server": {
+		"ls_ControlDb_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "@{linkedService().ServerName}"
 		},
-		"Ls_ControlDb_properties_typeProperties_database": {
+		"ls_ControlDb_properties_typeProperties_database": {
 			"type": "string",
 			"defaultValue": "@{linkedService().DatabaseName}"
 		},
@@ -42,11 +42,11 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"Ls_ControlDb_properties_typeProperties_server": {
-						"value": "[parameters('Ls_ControlDb_properties_typeProperties_server')]"
+					"ls_ControlDb_properties_typeProperties_server": {
+						"value": "[parameters('ls_ControlDb_properties_typeProperties_server')]"
 					},
-					"Ls_ControlDb_properties_typeProperties_database": {
-						"value": "[parameters('Ls_ControlDb_properties_typeProperties_database')]"
+					"ls_ControlDb_properties_typeProperties_database": {
+						"value": "[parameters('ls_ControlDb_properties_typeProperties_database')]"
 					}
 				}
 			},

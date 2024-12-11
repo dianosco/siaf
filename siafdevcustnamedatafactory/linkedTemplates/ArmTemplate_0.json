@@ -7,11 +7,11 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "siafdevcustnamedatafactory"
 		},
-		"Ls_ControlDb_properties_typeProperties_server": {
+		"ls_ControlDb_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "@{linkedService().ServerName}"
 		},
-		"Ls_ControlDb_properties_typeProperties_database": {
+		"ls_ControlDb_properties_typeProperties_database": {
 			"type": "string",
 			"defaultValue": "@{linkedService().DatabaseName}"
 		}
@@ -21,7 +21,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/Pl_MainTestingPipeline')]",
+			"name": "[concat(parameters('factoryName'), '/pl_MainTestingPipeline')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -44,7 +44,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Pl_Pipeline2')]",
+			"name": "[concat(parameters('factoryName'), '/pl_Pipeline2')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -70,7 +70,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Pl_Pipeline3')]",
+			"name": "[concat(parameters('factoryName'), '/pl_Pipeline3')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -96,51 +96,13 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Ls_ControlDb')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"parameters": {
-					"ServerName": {
-						"type": "string"
-					},
-					"DatabaseName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"server": "[parameters('Ls_ControlDb_properties_typeProperties_server')]",
-					"database": "[parameters('Ls_ControlDb_properties_typeProperties_database')]",
-					"encrypt": "mandatory",
-					"trustServerCertificate": false,
-					"authenticationType": "SystemAssignedManagedIdentity",
-					"alwaysEncryptedSettings": {
-						"alwaysEncryptedAkvAuthType": "ManagedIdentity"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/Ds_ControlDb')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
 					"referenceName": "Ls_ControlDb",
-					"type": "LinkedServiceReference",
-					"parameters": {
-						"ServerName": {
-							"value": "@dataset().ServerName",
-							"type": "Expression"
-						},
-						"DatabaseName": {
-							"value": "@dataset().DatabaseName",
-							"type": "Expression"
-						}
-					}
+					"type": "LinkedServiceReference"
 				},
 				"parameters": {
 					"ServerName": {
@@ -170,12 +132,38 @@
 					}
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Ls_ControlDb')]"
-			]
+			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Pl_101_EnvironmentDefinition')]",
+			"name": "[concat(parameters('factoryName'), '/ls_ControlDb')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"ServerName": {
+						"type": "string"
+					},
+					"DatabaseName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('ls_ControlDb_properties_typeProperties_server')]",
+					"database": "[parameters('ls_ControlDb_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SystemAssignedManagedIdentity",
+					"alwaysEncryptedSettings": {
+						"alwaysEncryptedAkvAuthType": "ManagedIdentity"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_101_EnvironmentDefinition')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
