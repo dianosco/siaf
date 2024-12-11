@@ -14,6 +14,10 @@
 		"ls_ControlDb_properties_typeProperties_database": {
 			"type": "string",
 			"defaultValue": "@{linkedService().DatabaseName}"
+		},
+		"ls_AzDataLakeStorage_SAMI_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://siafdevcustnamestaccraw.dfs.core.windows.net/"
 		}
 	},
 	"variables": {
@@ -281,6 +285,19 @@
 					"alwaysEncryptedSettings": {
 						"alwaysEncryptedAkvAuthType": "ManagedIdentity"
 					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_AzDataLakeStorage_SAMI')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('ls_AzDataLakeStorage_SAMI_properties_typeProperties_url')]"
 				}
 			},
 			"dependsOn": []

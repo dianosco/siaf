@@ -11,6 +11,9 @@
 		"ls_ControlDb_properties_typeProperties_database": {
 			"value": "@{linkedService().DatabaseName}"
 		},
+		"ls_AzDataLakeStorage_SAMI_properties_typeProperties_url": {
+			"value": "https://siafdevcustnamestaccraw.dfs.core.windows.net/"
+		},
 		"containerUri": {
 			"value": ""
 		},

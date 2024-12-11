@@ -15,6 +15,10 @@
 			"type": "string",
 			"defaultValue": "@{linkedService().DatabaseName}"
 		},
+		"ls_AzDataLakeStorage_SAMI_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://siafdevcustnamestaccraw.dfs.core.windows.net/"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -47,6 +51,9 @@
 					},
 					"ls_ControlDb_properties_typeProperties_database": {
 						"value": "[parameters('ls_ControlDb_properties_typeProperties_database')]"
+					},
+					"ls_AzDataLakeStorage_SAMI_properties_typeProperties_url": {
+						"value": "[parameters('ls_AzDataLakeStorage_SAMI_properties_typeProperties_url')]"
 					}
 				}
 			},
