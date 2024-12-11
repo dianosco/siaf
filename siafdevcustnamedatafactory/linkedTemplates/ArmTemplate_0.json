@@ -154,7 +154,16 @@
 				"linkedServiceName": {
 					"referenceName": "ls_ControlDb",
 					"type": "LinkedServiceReference",
-					"parameters": {}
+					"parameters": {
+						"pa_serverName": {
+							"value": "@dataset().pa_serverName",
+							"type": "Expression"
+						},
+						"pa_databaseName": {
+							"value": "@dataset().pa_databaseName",
+							"type": "Expression"
+						}
+					}
 				},
 				"parameters": {
 					"pa_serverName": {
