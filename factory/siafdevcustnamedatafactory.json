@@ -12,7 +12,7 @@
 			}
 		},
 		"globalConfigurations": {
-			"PipelineBillingEnabled": "false",
+			"PipelineBillingEnabled": "true",
 			"factoryStagingLSReferenceName": "ls_AzDataLakeStorage_SAMI",
 			"factoryStagingLSType": "LinkedServiceReference"
 		}
