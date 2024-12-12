@@ -499,7 +499,14 @@
 					{
 						"name": "Get Source parameters",
 						"type": "Lookup",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Get Control Server Name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "1:00:00",
 							"retry": 0,
@@ -529,6 +536,23 @@
 							},
 							"firstRowOnly": true
 						}
+					},
+					{
+						"name": "Get Control Server Name",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"policy": {
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pl_101_EnvironmentDefinition",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
 					}
 				],
 				"policy": {
@@ -540,6 +564,11 @@
 						"defaultValue": "siafdevcustnamesqlserver.database.windows.net"
 					}
 				},
+				"variables": {
+					"va_controlServerName": {
+						"type": "String"
+					}
+				},
 				"folder": {
 					"name": "200_Ingestion"
 				},
@@ -548,7 +577,8 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_AzSqlTable_SAMI')]",
 				"[concat(variables('factoryId'), '/datasets/ds_AzStAccParquet_SAMI')]",
-				"[concat(variables('factoryId'), '/datasets/ds_ControlDb')]"
+				"[concat(variables('factoryId'), '/datasets/ds_ControlDb')]",
+				"[concat(variables('factoryId'), '/pipelines/pl_101_EnvironmentDefinition')]"
 			]
 		}
 	]
