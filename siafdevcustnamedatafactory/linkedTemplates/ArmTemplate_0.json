@@ -600,7 +600,7 @@
 						"typeProperties": {
 							"variableName": "va_controlServerName",
 							"value": {
-								"value": "@string(activity('Get Environment Variables').output.pipelineReturnValue.va_environmentVariables[1])",
+								"value": "@string(activity('Get Environment Variables').output.pipelineReturnValue.va_environmentVariables)",
 								"type": "Expression"
 							}
 						}
