@@ -199,20 +199,18 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Wait1",
-						"type": "Wait",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"waitTimeInSeconds": 1
-						}
-					},
-					{
-						"name": "Copy data1",
+						"name": "Copy table to Landing zone",
 						"type": "Copy",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Get Source parameters",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
-							"timeout": "0.12:00:00",
+							"timeout": "1:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
@@ -263,19 +261,56 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Get Source parameters",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_ControlDb",
+								"type": "DatasetReference",
+								"parameters": {
+									"pa_serverName": {
+										"value": "@pipeline().parameters.pa_controlServerName",
+										"type": "Expression"
+									},
+									"pa_databaseName": {
+										"value": "@pipeline().parameters.pa_controlDatabaseName",
+										"type": "Expression"
+									},
+									"pa_tableSchema": "ingest",
+									"pa_tableName": "vw_SourceSystemParameters"
+								}
+							},
+							"firstRowOnly": true
+						}
 					}
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
 				"parameters": {
-					"pa_sourceName": {
+					"pa_controlServerName": {
 						"type": "string",
-						"defaultValue": "unservidorcualquiera.database.windows.net"
+						"defaultValue": "siafdevcustnamesqlserver.database.windows.net"
 					},
-					"pa_artifactName": {
+					"pa_controlDatabaseName": {
 						"type": "string",
-						"defaultValue": "unadatabasecualquiera"
+						"defaultValue": "siafdevcustnamesqldatabase"
 					}
 				},
 				"folder": {
@@ -285,7 +320,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_AzSqlTable_SAMI')]",
-				"[concat(variables('factoryId'), '/datasets/ds_AzStAccParquet_SAMI')]"
+				"[concat(variables('factoryId'), '/datasets/ds_AzStAccParquet_SAMI')]",
+				"[concat(variables('factoryId'), '/datasets/ds_ControlDb')]"
 			]
 		},
 		{
