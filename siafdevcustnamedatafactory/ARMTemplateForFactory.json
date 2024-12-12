@@ -168,7 +168,7 @@
 									"key": "va_environmentVariables",
 									"value": {
 										"type": "Expression",
-										"content": "@activity('Get Environment Variables').output.firstRow"
+										"content": "@activity('Get Environment Variables').output.firstRow.control_server_name"
 									}
 								}
 							],
@@ -314,10 +314,6 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"sqlReaderQuery": {
-									"value": "@concat(\n    'Select '\n    ,''''\n    ,variables('va_environmentVariables')\n    ,''''\n)",
-									"type": "Expression"
-								},
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
@@ -325,13 +321,10 @@
 								"referenceName": "ds_ControlDb",
 								"type": "DatasetReference",
 								"parameters": {
-									"pa_serverName": {
-										"value": "@pipeline().parameters.pa_controlServerName",
-										"type": "Expression"
-									},
+									"pa_serverName": "siafdevcustnamesqlserver.database.windows.net",
 									"pa_databaseName": "siafdevcustnamedatabase",
-									"pa_tableSchema": "ingest",
-									"pa_tableName": "vw_SourceSystemParameters"
+									"pa_tableSchema": "control",
+									"pa_tableName": "EnvironmentParameters"
 								}
 							},
 							"firstRowOnly": true
@@ -371,70 +364,11 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"variableName": "va_environmentVariables",
+							"variableName": "va_controlServerName",
 							"value": {
 								"value": "@array(activity('Get Environment Variables').output.pipelineReturnValue.va_environmentVariables)",
 								"type": "Expression"
 							}
-						}
-					},
-					{
-						"name": "ForEach1",
-						"type": "ForEach",
-						"dependsOn": [
-							{
-								"activity": "Set variable1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@variables('va_environmentVariables')",
-								"type": "Expression"
-							},
-							"activities": [
-								{
-									"name": "Get Source parameters_copy1",
-									"type": "Lookup",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "1:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "AzureSqlSource",
-											"sqlReaderQuery": {
-												"value": "select 1",
-												"type": "Expression"
-											},
-											"queryTimeout": "02:00:00",
-											"partitionOption": "None"
-										},
-										"dataset": {
-											"referenceName": "ds_ControlDb",
-											"type": "DatasetReference",
-											"parameters": {
-												"pa_serverName": {
-													"value": "@pipeline().parameters.pa_controlServerName",
-													"type": "Expression"
-												},
-												"pa_databaseName": "siafdevcustnamedatabase",
-												"pa_tableSchema": "ingest",
-												"pa_tableName": "vw_SourceSystemParameters"
-											}
-										},
-										"firstRowOnly": true
-									}
-								}
-							]
 						}
 					}
 				],
@@ -448,8 +382,8 @@
 					}
 				},
 				"variables": {
-					"va_environmentVariables": {
-						"type": "Array"
+					"va_controlServerName": {
+						"type": "String"
 					}
 				},
 				"folder": {
