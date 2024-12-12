@@ -297,7 +297,7 @@
 						"type": "Lookup",
 						"dependsOn": [
 							{
-								"activity": "Get Environment Variables",
+								"activity": "Get Env Vars",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -334,7 +334,7 @@
 						}
 					},
 					{
-						"name": "Get Environment Variables",
+						"name": "Get Env Vars",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
 						"policy": {
@@ -361,8 +361,8 @@
 					}
 				},
 				"variables": {
-					"va_controlServerName": {
-						"type": "String"
+					"va_environmentVariables": {
+						"type": "Array"
 					}
 				},
 				"folder": {
