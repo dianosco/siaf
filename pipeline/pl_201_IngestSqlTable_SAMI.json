@@ -68,7 +68,14 @@
 			{
 				"name": "Get Source parameters",
 				"type": "Lookup",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Get Control Server Name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "1:00:00",
 					"retry": 0,
@@ -98,12 +105,29 @@
 					},
 					"firstRowOnly": true
 				}
+			},
+			{
+				"name": "Get Control Server Name",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"parameters": {
 			"pa_controlServerName": {
 				"type": "string",
 				"defaultValue": "siafdevcustnamesqlserver.database.windows.net"
+			}
+		},
+		"variables": {
+			"va_controlServerName": {
+				"type": "String"
 			}
 		},
 		"folder": {
