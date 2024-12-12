@@ -151,8 +151,8 @@
 				}
 			},
 			{
-				"name": "Get Source parameters_copy1",
-				"type": "Lookup",
+				"name": "ForEach1",
+				"type": "ForEach",
 				"dependsOn": [
 					{
 						"activity": "Set variable1",
@@ -161,35 +161,52 @@
 						]
 					}
 				],
-				"policy": {
-					"timeout": "1:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "DECLARE @json NVARCHAR(MAX) = '[{\\\"id\\\":1,\\\"control_server_name\\\":\\\"siafdevcustnamesqlserver.database.windows.net\\\",\\\"control_database_name\\\":\\\"siafdevcustnamesqldatabase\\\",\\\"raw_storage_account\\\":\\\"abc\\\",\\\"consumption_storage_account\\\":\\\"def\\\",\\\"support_storage_account\\\":\\\"ghi\\\",\\\"UpsertDate\\\":\\\"2024-12-12T00:00:00\\\"}]';\n\nSELECT \n    JSONData.[key] AS Key, \n    JSONData.[value] AS Value\nFROM \n    OPENJSON(@json) \nWITH (\n        id INT,\n        control_server_name NVARCHAR(255),\n        control_database_name NVARCHAR(255),\n        raw_storage_account NVARCHAR(255),\n        consumption_storage_account NVARCHAR(255),\n        support_storage_account NVARCHAR(255),\n        UpsertDate DATETIME\n    ) AS JSONData;\n",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
+					"items": {
+						"value": "@variables('va_environmentVariables')",
+						"type": "Expression"
 					},
-					"dataset": {
-						"referenceName": "ds_ControlDb",
-						"type": "DatasetReference",
-						"parameters": {
-							"pa_serverName": {
-								"value": "@pipeline().parameters.pa_controlServerName",
-								"type": "Expression"
+					"activities": [
+						{
+							"name": "Get Source parameters_copy1",
+							"type": "Lookup",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "1:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
 							},
-							"pa_databaseName": "siafdevcustnamedatabase",
-							"pa_tableSchema": "ingest",
-							"pa_tableName": "vw_SourceSystemParameters"
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "select 1",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"dataset": {
+									"referenceName": "ds_ControlDb",
+									"type": "DatasetReference",
+									"parameters": {
+										"pa_serverName": {
+											"value": "@pipeline().parameters.pa_controlServerName",
+											"type": "Expression"
+										},
+										"pa_databaseName": "siafdevcustnamedatabase",
+										"pa_tableSchema": "ingest",
+										"pa_tableName": "vw_SourceSystemParameters"
+									}
+								},
+								"firstRowOnly": true
+							}
 						}
-					},
-					"firstRowOnly": true
+					]
 				}
 			}
 		],
