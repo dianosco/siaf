@@ -366,7 +366,7 @@
 						"typeProperties": {
 							"variableName": "va_controlServerName",
 							"value": {
-								"value": "@string(activity('Get Environment Variables').output.pipelineReturnValue.va_environmentVariables.value)",
+								"value": "@string(activity('Get Environment Variables').output.pipelineReturnValue.va_environmentVariables[1])",
 								"type": "Expression"
 							}
 						}
@@ -374,7 +374,14 @@
 					{
 						"name": "Get Source parameters_copy1",
 						"type": "Lookup",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Set variable1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "1:00:00",
 							"retry": 0,
@@ -386,6 +393,10 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
+								"sqlReaderQuery": {
+									"value": "@concat(\r\n    'select '\r\n    ,''''\r\n    ,variables('va_controlServerName')\r\n    ,''''\r\n)",
+									"type": "Expression"
+								},
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
