@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Get Source-Artifact parameters",
+						"activity": "Get Source parameters",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -66,7 +66,7 @@
 				]
 			},
 			{
-				"name": "Get Source-Artifact parameters",
+				"name": "Get Source parameters",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -85,17 +85,22 @@
 					},
 					"dataset": {
 						"referenceName": "ds_AzSqlTable_SAMI",
-						"type": "DatasetReference"
-					}
+						"type": "DatasetReference",
+						"parameters": {
+							"pa_tableSchema": "ingest",
+							"pa_tableName": "vw_SourceSystemParameters"
+						}
+					},
+					"firstRowOnly": true
 				}
 			}
 		],
 		"parameters": {
-			"pa_sourceName": {
+			"pa_controlServerName": {
 				"type": "string",
 				"defaultValue": "siafdevcustnamesqlserver.database.windows.net"
 			},
-			"pa_artifactName": {
+			"pa_controlDatabaseName": {
 				"type": "string",
 				"defaultValue": "siafdevcustnamesqldatabase"
 			}
