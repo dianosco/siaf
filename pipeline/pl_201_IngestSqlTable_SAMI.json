@@ -107,10 +107,6 @@
 			"pa_controlServerName": {
 				"type": "string",
 				"defaultValue": "siafdevcustnamesqlserver.database.windows.net"
-			},
-			"pa_controlDatabaseName": {
-				"type": "string",
-				"defaultValue": "siafdevcustnamesqldatabase"
 			}
 		},
 		"folder": {

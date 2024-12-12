@@ -45,8 +45,8 @@
 								"value": "@variables('va_controlDatabaseName')",
 								"type": "Expression"
 							},
-							"pa_tableSchema": "ingest",
-							"pa_tableName": "vw_ArtifactsToIngestBySource"
+							"pa_tableSchema": "control",
+							"pa_tableName": "vw_EnvironmentParameters"
 						}
 					},
 					"firstRowOnly": false
