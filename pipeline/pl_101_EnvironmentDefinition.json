@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Environment Variables",
+				"name": "Get Environment Variables",
 				"type": "Lookup",
 				"dependsOn": [
 					{
@@ -84,6 +84,36 @@
 						"value": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_environment\n    ,pipeline().globalParameters.gp_custName\n    ,'sqldatabase'\n)",
 						"type": "Expression"
 					}
+				}
+			},
+			{
+				"name": "Return Control Server Name",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Environment Variables",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "pipelineReturnValue",
+					"value": [
+						{
+							"key": "va_environmentVariables",
+							"value": {
+								"type": "Expression",
+								"content": "@activity('Get Environment Variables').output"
+							}
+						}
+					],
+					"setSystemVariable": true
 				}
 			}
 		],
