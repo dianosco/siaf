@@ -94,13 +94,10 @@
 						"referenceName": "ds_ControlDb",
 						"type": "DatasetReference",
 						"parameters": {
-							"pa_serverName": {
-								"value": "@pipeline().parameters.pa_controlServerName",
-								"type": "Expression"
-							},
+							"pa_serverName": "siafdevcustnamesqlserver.database.windows.net",
 							"pa_databaseName": "siafdevcustnamedatabase",
-							"pa_tableSchema": "ingest",
-							"pa_tableName": "vw_SourceSystemParameters"
+							"pa_tableSchema": "control",
+							"pa_tableName": "EnvironmentParameters"
 						}
 					},
 					"firstRowOnly": true
