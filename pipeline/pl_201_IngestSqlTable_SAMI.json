@@ -84,7 +84,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_AzSqlTable_SAMI",
+						"referenceName": "ds_ControlDb",
 						"type": "DatasetReference",
 						"parameters": {
 							"pa_serverName": {
