@@ -109,7 +109,7 @@
 							"key": "va_environmentVariables",
 							"value": {
 								"type": "Expression",
-								"content": "@activity('Get Environment Variables').output.firstRow"
+								"content": "@activity('Get Environment Variables').output.firstRow.control_server_name"
 							}
 						}
 					],
