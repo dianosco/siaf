@@ -91,10 +91,7 @@
 								"value": "@pipeline().parameters.pa_controlServerName",
 								"type": "Expression"
 							},
-							"pa_databaseName": {
-								"value": "@pipeline().parameters.pa_controlDatabaseName",
-								"type": "Expression"
-							},
+							"pa_databaseName": "siafdevcustnamedatabase",
 							"pa_tableSchema": "ingest",
 							"pa_tableName": "vw_SourceSystemParameters"
 						}
