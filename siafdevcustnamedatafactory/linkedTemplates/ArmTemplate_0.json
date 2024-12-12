@@ -428,7 +428,7 @@
 									"key": "va_environmentVariables",
 									"value": {
 										"type": "Expression",
-										"content": "@activity('Get Environment Variables').output"
+										"content": "@activity('Get Environment Variables').output.firstRow"
 									}
 								}
 							],
