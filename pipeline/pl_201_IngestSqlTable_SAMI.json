@@ -76,17 +76,28 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_AzSqlTable_SAMI",
+						"type": "DatasetReference"
+					}
+				}
 			}
 		],
 		"parameters": {
 			"pa_sourceName": {
 				"type": "string",
-				"defaultValue": "unservidorcualquiera.database.windows.net"
+				"defaultValue": "siafdevcustnamesqlserver.database.windows.net"
 			},
 			"pa_artifactName": {
 				"type": "string",
-				"defaultValue": "unadatabasecualquiera"
+				"defaultValue": "siafdevcustnamesqldatabase"
 			}
 		},
 		"folder": {
