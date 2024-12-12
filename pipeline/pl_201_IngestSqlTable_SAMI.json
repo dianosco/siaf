@@ -115,6 +115,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_101_EnvironmentDefinition",
+						"type": "PipelineReference"
+					},
 					"waitOnCompletion": true
 				}
 			}
