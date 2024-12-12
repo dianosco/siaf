@@ -297,7 +297,7 @@
 						"type": "Lookup",
 						"dependsOn": [
 							{
-								"activity": "Get Control Server Name",
+								"activity": "Get Environment Variables",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -334,7 +334,7 @@
 						}
 					},
 					{
-						"name": "Get Control Server Name",
+						"name": "Get Environment Variables",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
 						"policy": {
