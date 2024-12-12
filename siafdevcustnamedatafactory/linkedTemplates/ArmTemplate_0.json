@@ -548,6 +548,10 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
+								"sqlReaderQuery": {
+									"value": "@concat(\n    'Select '\n    ,''''\n    ,variables('va_environmentVariables')\n    ,''''\n)",
+									"type": "Expression"
+								},
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
