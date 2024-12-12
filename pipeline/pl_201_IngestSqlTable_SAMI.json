@@ -68,6 +68,16 @@
 				]
 			}
 		],
+		"parameters": {
+			"pa_sourceName": {
+				"type": "string",
+				"defaultValue": "unservidorcualquiera.database.windows.net"
+			},
+			"pa_artifactName": {
+				"type": "string",
+				"defaultValue": "unadatabasecualquiera"
+			}
+		},
 		"folder": {
 			"name": "200_Ingestion"
 		},
