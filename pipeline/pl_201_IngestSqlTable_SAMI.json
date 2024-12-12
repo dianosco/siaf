@@ -141,7 +141,7 @@
 				"typeProperties": {
 					"variableName": "va_environmentVariables",
 					"value": {
-						"value": "@activity('Get Environment Variables').output.pipelineReturnValue.value",
+						"value": "@activity('Get Environment Variables').output.pipelineReturnValue",
 						"type": "Expression"
 					}
 				}
