@@ -172,10 +172,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": {
-							"value": "@concat('\n\nSELECT \n    JSONData.[key] AS Key, \n    JSONData.[value] AS Value\nFROM \n    OPENJSON('\n,variables('va_environmentVariables')\n,') \nWITH (\n        id INT,\n        control_server_name NVARCHAR(255),\n        control_database_name NVARCHAR(255),\n        raw_storage_account NVARCHAR(255),\n        consumption_storage_account NVARCHAR(255),\n        support_storage_account NVARCHAR(255),\n        UpsertDate DATETIME\n    ) AS JSONData;\n\n')",
-							"type": "Expression"
-						},
+						"sqlReaderQuery": "DECLARE @json NVARCHAR(MAX) = '[{\\\"id\\\":1,\\\"control_server_name\\\":\\\"siafdevcustnamesqlserver.database.windows.net\\\",\\\"control_database_name\\\":\\\"siafdevcustnamesqldatabase\\\",\\\"raw_storage_account\\\":\\\"abc\\\",\\\"consumption_storage_account\\\":\\\"def\\\",\\\"support_storage_account\\\":\\\"ghi\\\",\\\"UpsertDate\\\":\\\"2024-12-12T00:00:00\\\"}]';\n\nSELECT \n    JSONData.[key] AS Key, \n    JSONData.[value] AS Value\nFROM \n    OPENJSON(@json) \nWITH (\n        id INT,\n        control_server_name NVARCHAR(255),\n        control_database_name NVARCHAR(255),\n        raw_storage_account NVARCHAR(255),\n        consumption_storage_account NVARCHAR(255),\n        support_storage_account NVARCHAR(255),\n        UpsertDate DATETIME\n    ) AS JSONData;\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
