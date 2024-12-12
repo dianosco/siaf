@@ -136,7 +136,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "va_environmentVariables",
+					"variableName": "va_controlServerName",
 					"value": {
 						"value": "@array(activity('Get Environment Variables').output.pipelineReturnValue.va_environmentVariables)",
 						"type": "Expression"
@@ -210,8 +210,8 @@
 			}
 		},
 		"variables": {
-			"va_environmentVariables": {
-				"type": "Array"
+			"va_controlServerName": {
+				"type": "String"
 			}
 		},
 		"folder": {
