@@ -164,7 +164,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@variables('va_environmentVariables')",
+						"value": "@variables('va_environmentVariables').value",
 						"type": "Expression"
 					},
 					"activities": [
