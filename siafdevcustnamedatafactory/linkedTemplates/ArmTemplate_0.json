@@ -727,6 +727,219 @@
 				"[concat(variables('factoryId'), '/datasets/ds_AzStAccParquet_SAMI')]",
 				"[concat(variables('factoryId'), '/datasets/ds_ControlDb')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_201_IngestSqlTable_SAMI_copy1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy table to Landing zone",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Get SourceSystem parameters",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Get ArtifactToIng parameters",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_AzSqlTable_SAMI",
+								"type": "DatasetReference",
+								"parameters": {
+									"pa_serverName": "unservidorcualquiera.database.windows.net",
+									"pa_databaseName": "unadatabasecualquiera",
+									"pa_tableSchema": "SalesLT",
+									"pa_tableName": "ProductModel"
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_AzStAccParquet_SAMI",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Get SourceSystem parameters",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "Set Control Server Name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": {
+									"value": "@concat(\n    'Select * from ingest.vw_SourceSystemParameters '\n    ,'where source_name = '\n    ,''''\n    ,pipeline().parameters.pa_sourceName\n    ,''''\n)",
+									"type": "Expression"
+								},
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_ControlDb",
+								"type": "DatasetReference",
+								"parameters": {
+									"pa_serverName": {
+										"value": "@variables('va_controlServerName')",
+										"type": "Expression"
+									},
+									"pa_databaseName": "siafcontroldatabase",
+									"pa_tableSchema": "control",
+									"pa_tableName": "vw_EnvironmentParameters"
+								}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "Set Control Server Name",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "va_controlServerName",
+							"value": {
+								"value": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_environment\n    ,pipeline().globalParameters.gp_custName\n    ,'sqlserver.database.windows.net'\n)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Get ArtifactToIng parameters",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "Set Control Server Name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": {
+									"value": "@concat(\n    'Select * from ingest.vw_ArtifactsToIngestParameters '\n    ,'where source_name = '\n    ,''''\n    ,pipeline().parameters.pa_sourceName\n    ,''''\n    ,' and artifact_name = '\n    ,''''\n    ,pipeline().parameters.pa_artifactName\n    ,''''\n)",
+									"type": "Expression"
+								},
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_ControlDb",
+								"type": "DatasetReference",
+								"parameters": {
+									"pa_serverName": {
+										"value": "@variables('va_controlServerName')",
+										"type": "Expression"
+									},
+									"pa_databaseName": "siafcontroldatabase",
+									"pa_tableSchema": "control",
+									"pa_tableName": "vw_EnvironmentParameters"
+								}
+							},
+							"firstRowOnly": false
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"pa_artifactName": {
+						"type": "string",
+						"defaultValue": "dbo.DimCustomer"
+					},
+					"pa_sourceName": {
+						"type": "string",
+						"defaultValue": "Projex"
+					}
+				},
+				"variables": {
+					"va_controlServerName": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "200_Ingestion"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_AzSqlTable_SAMI')]",
+				"[concat(variables('factoryId'), '/datasets/ds_AzStAccParquet_SAMI')]",
+				"[concat(variables('factoryId'), '/datasets/ds_ControlDb')]"
+			]
 		}
 	]
 }
