@@ -35,11 +35,17 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "va_controlDatabaseName",
-					"value": {
-						"value": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_environment\n    ,pipeline().globalParameters.gp_custName\n    ,'sqldatabase'\n)",
-						"type": "Expression"
-					}
+					"variableName": "pipelineReturnValue",
+					"value": [
+						{
+							"key": "va_controlDbName",
+							"value": {
+								"type": "Expression",
+								"content": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_environment\n    ,pipeline().globalParameters.gp_custName\n    ,'sqldatabase'\n)"
+							}
+						}
+					],
+					"setSystemVariable": true
 				}
 			}
 		],
