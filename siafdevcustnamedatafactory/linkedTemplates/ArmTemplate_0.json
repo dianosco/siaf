@@ -532,7 +532,7 @@
 								]
 							},
 							{
-								"activity": "Get ArtifactToIng parameters",
+								"activity": "Get DatabaseName",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -654,7 +654,7 @@
 						}
 					},
 					{
-						"name": "Get ArtifactToIng parameters",
+						"name": "Get DatabaseName",
 						"type": "Lookup",
 						"dependsOn": [
 							{
@@ -676,7 +676,7 @@
 							"source": {
 								"type": "AzureSqlSource",
 								"sqlReaderQuery": {
-									"value": "@concat(\n    'Select * from ingest.vw_ArtifactsToIngestParameters '\n    ,'where source_name = '\n    ,''''\n    ,pipeline().parameters.pa_sourceName\n    ,''''\n    ,' and artifact_name = '\n    ,''''\n    ,pipeline().parameters.pa_artifactName\n    ,''''\n)",
+									"value": "@concat(\n    'Select distinct src_param_value \n        from ingest.vw_ArtifactAndSourceParameters \n        where src_param_name = ''DatabaseName'' \n        and source_name = '\n    ,''''\n    ,pipeline().parameters.pa_sourceName\n    ,''''\n)",
 									"type": "Expression"
 								},
 								"queryTimeout": "02:00:00",
