@@ -883,7 +883,7 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"pa_serverName": {
-										"value": "@activity('Get ServerName').output.value.src_param_value",
+										"value": "@activity('Get ServerName').output.value",
 										"type": "Expression"
 									},
 									"pa_databaseName": "unadatabasecualquiera",
