@@ -1,0 +1,51 @@
+{
+	"name": "pl_101b_EnvironmentVariables",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set Server Name",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "pipelineReturnValue",
+					"value": [
+						{
+							"key": "va_controlSvName",
+							"value": {
+								"type": "Expression",
+								"content": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_environment\n    ,pipeline().globalParameters.gp_custName\n    ,'sqlserver.database.windows.net'\n)"
+							}
+						}
+					],
+					"setSystemVariable": true
+				}
+			},
+			{
+				"name": "Set Database Name",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "va_controlDatabaseName",
+					"value": {
+						"value": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_environment\n    ,pipeline().globalParameters.gp_custName\n    ,'sqldatabase'\n)",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "100_Control"
+		},
+		"annotations": []
+	}
+}
