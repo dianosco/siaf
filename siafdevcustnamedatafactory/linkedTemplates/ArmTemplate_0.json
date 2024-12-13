@@ -56,6 +56,69 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/pl_101b_EnvironmentVariables')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Set Server Name",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "pipelineReturnValue",
+							"value": [
+								{
+									"key": "va_controlSvName",
+									"value": {
+										"type": "Expression",
+										"content": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_environment\n    ,pipeline().globalParameters.gp_custName\n    ,'sqlserver.database.windows.net'\n)"
+									}
+								}
+							],
+							"setSystemVariable": true
+						}
+					},
+					{
+						"name": "Set Database Name",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "pipelineReturnValue",
+							"value": [
+								{
+									"key": "va_controlDbName",
+									"value": {
+										"type": "Expression",
+										"content": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_environment\n    ,pipeline().globalParameters.gp_custName\n    ,'sqldatabase'\n)"
+									}
+								}
+							],
+							"setSystemVariable": true
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "100_Control"
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/pl_200_Pipeline2')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -574,7 +637,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
-								"referenceName": "pl_101_EnvironmentDefinition",
+								"referenceName": "pl_101b_EnvironmentVariables",
 								"type": "PipelineReference"
 							},
 							"waitOnCompletion": true,
@@ -671,7 +734,7 @@
 				"[concat(variables('factoryId'), '/datasets/ds_AzSqlTable_SAMI')]",
 				"[concat(variables('factoryId'), '/datasets/ds_AzStAccParquet_SAMI')]",
 				"[concat(variables('factoryId'), '/datasets/ds_ControlDb')]",
-				"[concat(variables('factoryId'), '/pipelines/pl_101_EnvironmentDefinition')]"
+				"[concat(variables('factoryId'), '/pipelines/pl_101b_EnvironmentVariables')]"
 			]
 		}
 	]
