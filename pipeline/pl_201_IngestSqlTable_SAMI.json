@@ -124,6 +124,14 @@
 				}
 			}
 		],
+		"parameters": {
+			"pa_artifactName": {
+				"type": "string"
+			},
+			"pa_sourceName": {
+				"type": "string"
+			}
+		},
 		"variables": {
 			"va_controlServerName": {
 				"type": "String"
