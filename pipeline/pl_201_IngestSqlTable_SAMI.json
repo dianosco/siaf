@@ -99,7 +99,7 @@
 								"type": "Expression"
 							},
 							"pa_databaseName": "siafcustnamesqldatabase",
-							"pa_tableSchema": "vw_EnvironmentParameters",
+							"pa_tableSchema": "control",
 							"pa_tableName": "vw_EnvironmentParameters"
 						}
 					},
