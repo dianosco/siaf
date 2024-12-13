@@ -113,7 +113,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "pl_101_EnvironmentDefinition",
+						"referenceName": "pl_101b_EnvironmentVariables",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
