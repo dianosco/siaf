@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Set Server Name",
+				"name": "Set Control Server Name",
 				"type": "SetVariable",
 				"dependsOn": [],
 				"policy": {
@@ -20,7 +20,7 @@
 				}
 			},
 			{
-				"name": "Set Database Name",
+				"name": "Set Control Database Name",
 				"type": "SetVariable",
 				"dependsOn": [],
 				"policy": {
@@ -41,13 +41,13 @@
 				"type": "Lookup",
 				"dependsOn": [
 					{
-						"activity": "Set Server Name",
+						"activity": "Set Control Server Name",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					},
 					{
-						"activity": "Set Database Name",
+						"activity": "Set Control Database Name",
 						"dependencyConditions": [
 							"Succeeded"
 						]
