@@ -384,8 +384,14 @@
 								"referenceName": "ds_ControlDb",
 								"type": "DatasetReference",
 								"parameters": {
-									"pa_serverName": "siafdevcustnamesqlserver.database.windows.net",
-									"pa_databaseName": "siafdevcustnamedatabase",
+									"pa_serverName": {
+										"value": "@activity('Get Environment Variables').output.pipelineReturnValue.va_controlSvName",
+										"type": "Expression"
+									},
+									"pa_databaseName": {
+										"value": "@activity('Get Environment Variables').output.pipelineReturnValue.va_controlDbName",
+										"type": "Expression"
+									},
 									"pa_tableSchema": "control",
 									"pa_tableName": "EnvironmentParameters"
 								}
