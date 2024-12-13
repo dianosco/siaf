@@ -113,7 +113,7 @@
 							"pa_tableName": "vw_EnvironmentParameters"
 						}
 					},
-					"firstRowOnly": true
+					"firstRowOnly": false
 				}
 			},
 			{
@@ -175,7 +175,7 @@
 							"pa_tableName": "vw_EnvironmentParameters"
 						}
 					},
-					"firstRowOnly": true
+					"firstRowOnly": false
 				}
 			}
 		],
