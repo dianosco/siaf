@@ -882,7 +882,10 @@
 								"referenceName": "ds_AzSqlTable_SAMI",
 								"type": "DatasetReference",
 								"parameters": {
-									"pa_serverName": "unservidorcualquiera.database.windows.net",
+									"pa_serverName": {
+										"value": "@activity('Get ServerName').output.value.src_param_value",
+										"type": "Expression"
+									},
 									"pa_databaseName": "unadatabasecualquiera",
 									"pa_tableSchema": "SalesLT",
 									"pa_tableName": "ProductModel"
