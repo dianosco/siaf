@@ -83,7 +83,7 @@
 							"pa_tableName": "EnvironmentParameters"
 						}
 					},
-					"firstRowOnly": true
+					"firstRowOnly": false
 				}
 			}
 		],
