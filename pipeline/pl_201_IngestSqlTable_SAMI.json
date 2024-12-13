@@ -181,10 +181,12 @@
 		],
 		"parameters": {
 			"pa_artifactName": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "dbo.DimCustomer"
 			},
 			"pa_sourceName": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "Projex"
 			}
 		},
 		"variables": {
