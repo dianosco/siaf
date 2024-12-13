@@ -12,17 +12,11 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "pipelineReturnValue",
-					"value": [
-						{
-							"key": "va_controlSvName",
-							"value": {
-								"type": "Expression",
-								"content": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_environment\n    ,pipeline().globalParameters.gp_custName\n    ,'sqlserver.database.windows.net'\n)"
-							}
-						}
-					],
-					"setSystemVariable": true
+					"variableName": "va_controlServerName",
+					"value": {
+						"value": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_environment\n    ,pipeline().globalParameters.gp_custName\n    ,'sqlserver.database.windows.net'\n)",
+						"type": "Expression"
+					}
 				}
 			},
 			{
@@ -35,20 +29,72 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "pipelineReturnValue",
-					"value": [
-						{
-							"key": "va_controlDbName",
-							"value": {
-								"type": "Expression",
-								"content": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_environment\n    ,pipeline().globalParameters.gp_custName\n    ,'sqldatabase'\n)"
-							}
+					"variableName": "va_controlDatabaseName",
+					"value": {
+						"value": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_environment\n    ,pipeline().globalParameters.gp_custName\n    ,'sqldatabase'\n)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Get Source parameters",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Set Server Name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set Database Name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "1:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_ControlDb",
+						"type": "DatasetReference",
+						"parameters": {
+							"pa_serverName": {
+								"value": "@variables('va_controlServerName')",
+								"type": "Expression"
+							},
+							"pa_databaseName": {
+								"value": "@variables('va_controlDatabaseName')",
+								"type": "Expression"
+							},
+							"pa_tableSchema": "control",
+							"pa_tableName": "EnvironmentParameters"
 						}
-					],
-					"setSystemVariable": true
+					},
+					"firstRowOnly": true
 				}
 			}
 		],
+		"variables": {
+			"va_controlServerName": {
+				"type": "String"
+			},
+			"va_controlDatabaseName": {
+				"type": "String"
+			}
+		},
 		"folder": {
 			"name": "100_Control"
 		},
