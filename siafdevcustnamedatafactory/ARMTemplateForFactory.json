@@ -344,7 +344,13 @@
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "Get Source parameters",
+								"activity": "Get SourceSystem parameters",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Get ArtifactToIng parameters",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -404,7 +410,7 @@
 						]
 					},
 					{
-						"name": "Get Source parameters",
+						"name": "Get SourceSystem parameters",
 						"type": "Lookup",
 						"dependsOn": [
 							{
@@ -425,6 +431,10 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
+								"sqlReaderQuery": {
+									"value": "@concat(\n    'Select * from ingest.vw_SourceSystemParameters '\n    ,'where source_name = '\n    ,''''\n    ,pipeline().parameters.pa_sourceName\n    ,''''\n)",
+									"type": "Expression"
+								},
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
@@ -460,10 +470,63 @@
 								"type": "Expression"
 							}
 						}
+					},
+					{
+						"name": "Get ArtifactToIng parameters",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "Set Control Server Name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": {
+									"value": "@concat(\n    'Select * from ingest.vw_ArtifactsToIngestParameters '\n    ,'where source_name = '\n    ,''''\n    ,pipeline().parameters.pa_sourceName\n    ,''''\n    ,' and artifact_name = '\n    ,''''\n    ,pipeline().parameters.pa_artifactName\n    ,''''\n)",
+									"type": "Expression"
+								},
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_ControlDb",
+								"type": "DatasetReference",
+								"parameters": {
+									"pa_serverName": {
+										"value": "@variables('va_controlServerName')",
+										"type": "Expression"
+									},
+									"pa_databaseName": "siafcustnamesqldatabase",
+									"pa_tableSchema": "control",
+									"pa_tableName": "vw_EnvironmentParameters"
+								}
+							},
+							"firstRowOnly": true
+						}
 					}
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"pa_artifactName": {
+						"type": "string"
+					},
+					"pa_sourceName": {
+						"type": "string"
+					}
 				},
 				"variables": {
 					"va_controlServerName": {
