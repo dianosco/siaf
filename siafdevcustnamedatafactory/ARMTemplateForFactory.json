@@ -380,7 +380,7 @@
 							"source": {
 								"type": "AzureSqlSource",
 								"sqlReaderQuery": {
-									"value": "@concat(\n    'Select distinct src_param_value \n        from ingest.vw_ArtifactAndSourceParameters \n        where source_param_name = ''ServerName'' \n        and source_name = '\n    ,''''\n    ,pipeline().parameters.pa_sourceName\n    ,''''\n)",
+									"value": "@concat(\n    'Select distinct src_param_value \n        from ingest.vw_ArtifactAndSourceParameters \n        where src_param_name = ''ServerName'' \n        and source_name = '\n    ,''''\n    ,pipeline().parameters.pa_sourceName\n    ,''''\n)",
 									"type": "Expression"
 								},
 								"queryTimeout": "02:00:00",
