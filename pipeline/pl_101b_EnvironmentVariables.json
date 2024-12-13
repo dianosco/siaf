@@ -20,34 +20,11 @@
 				}
 			},
 			{
-				"name": "Set Control Database Name",
-				"type": "SetVariable",
-				"dependsOn": [],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "va_controlDatabaseName",
-					"value": {
-						"value": "@concat(\n    'siaf'\n    ,pipeline().globalParameters.gp_environment\n    ,pipeline().globalParameters.gp_custName\n    ,'sqldatabase'\n)",
-						"type": "Expression"
-					}
-				}
-			},
-			{
 				"name": "Get Source parameters",
 				"type": "Lookup",
 				"dependsOn": [
 					{
 						"activity": "Set Control Server Name",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "Set Control Database Name",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -75,10 +52,7 @@
 								"value": "@variables('va_controlServerName')",
 								"type": "Expression"
 							},
-							"pa_databaseName": {
-								"value": "@variables('va_controlDatabaseName')",
-								"type": "Expression"
-							},
+							"pa_databaseName": "siafcustnameslqdatabase",
 							"pa_tableSchema": "control",
 							"pa_tableName": "EnvironmentParameters"
 						}
