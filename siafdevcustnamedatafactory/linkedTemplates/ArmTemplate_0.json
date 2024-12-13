@@ -542,6 +542,12 @@
 								"dependencyConditions": [
 									"Succeeded"
 								]
+							},
+							{
+								"activity": "Get Table Name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
 							}
 						],
 						"policy": {
@@ -728,6 +734,51 @@
 								"type": "AzureSqlSource",
 								"sqlReaderQuery": {
 									"value": "@concat(\n    'Select distinct ati_param_value \n        from ingest.vw_ArtifactAndSourceParameters \n        where ati_param_name = ''TableSchema'' \n        and source_name = '\n    ,''''\n    ,pipeline().parameters.pa_sourceName\n    ,''''\n    ,' and artifact_name = '\n    ,''''\n    ,pipeline().parameters.pa_artifactName\n    ,''''\n)",
+									"type": "Expression"
+								},
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_ControlDb",
+								"type": "DatasetReference",
+								"parameters": {
+									"pa_serverName": {
+										"value": "@variables('va_controlServerName')",
+										"type": "Expression"
+									},
+									"pa_databaseName": "siafcontroldatabase",
+									"pa_tableSchema": "control",
+									"pa_tableName": "vw_EnvironmentParameters"
+								}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "Get Table Name",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "Set Control Server Name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": {
+									"value": "@concat(\n    'Select distinct ati_param_value \n        from ingest.vw_ArtifactAndSourceParameters \n        where ati_param_name = ''TableName'' \n        and source_name = '\n    ,''''\n    ,pipeline().parameters.pa_sourceName\n    ,''''\n    ,' and artifact_name = '\n    ,''''\n    ,pipeline().parameters.pa_artifactName\n    ,''''\n)",
 									"type": "Expression"
 								},
 								"queryTimeout": "02:00:00",
