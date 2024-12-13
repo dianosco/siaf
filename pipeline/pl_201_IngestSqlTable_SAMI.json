@@ -95,15 +95,12 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"pa_serverName": {
-								"value": "@activity('Get Environment Variables').output.pipelineReturnValue.va_controlSvName",
+								"value": "@variables('va_controlServerName')",
 								"type": "Expression"
 							},
-							"pa_databaseName": {
-								"value": "@activity('Get Environment Variables').output.pipelineReturnValue.va_controlDbName",
-								"type": "Expression"
-							},
-							"pa_tableSchema": "control",
-							"pa_tableName": "EnvironmentParameters"
+							"pa_databaseName": "siafcustnamesqldatabase",
+							"pa_tableSchema": "vw_EnvironmentParameters",
+							"pa_tableName": "vw_EnvironmentParameters"
 						}
 					},
 					"firstRowOnly": true
