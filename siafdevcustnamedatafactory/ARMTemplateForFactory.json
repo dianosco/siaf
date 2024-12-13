@@ -886,7 +886,10 @@
 										"value": "@activity('Get ServerName').output.value",
 										"type": "Expression"
 									},
-									"pa_databaseName": "unadatabasecualquiera",
+									"pa_databaseName": {
+										"value": "@activity('Get DatabaseName').output.value",
+										"type": "Expression"
+									},
 									"pa_tableSchema": "SalesLT",
 									"pa_tableName": "ProductModel"
 								}
