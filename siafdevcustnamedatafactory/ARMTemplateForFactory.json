@@ -420,7 +420,7 @@
 										"value": "@variables('va_controlServerName')",
 										"type": "Expression"
 									},
-									"pa_databaseName": "siafcustnamesqldatabase",
+									"pa_databaseName": "siafcontroldatabase",
 									"pa_tableSchema": "control",
 									"pa_tableName": "vw_EnvironmentParameters"
 								}
@@ -482,7 +482,7 @@
 										"value": "@variables('va_controlServerName')",
 										"type": "Expression"
 									},
-									"pa_databaseName": "siafcustnamesqldatabase",
+									"pa_databaseName": "siafcontroldatabase",
 									"pa_tableSchema": "control",
 									"pa_tableName": "vw_EnvironmentParameters"
 								}
